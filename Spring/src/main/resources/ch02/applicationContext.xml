@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="constructorInstance" class="com.fcant.ch02.instance.BeanClass"/>-->
+
+    <!-- 静态工厂方法实例化Bean，createInstance为静态工厂类BeanStaticFactory中的静态方法-->
+    <bean id="staticFactoryInstance" class="com.fcant.ch02.instance.BeanStaticFactory"
+          factory-method="createInstance"/>
+
+    <bean id="myFactory" class="com.fcant.ch02.instance.BeanInstanceFactory"/>
+    <!-- 使用factory-bean属性指定配置工厂 ，
+    使用factory-method属性指定使用工厂中哪个方法实例化Bean-->
+    <bean id="instanceFactoryInstance" factory-bean="myFactory" factory-method="createBeanClassInstance"/>
+
+<!--    <bean id="constructorInstance" class="com.fcant.ch02.instance.BeanClass"/>-->
+<!--    <bean id="constructorInstance" class="com.fcant.ch02.instance.BeanClass" scope="singleton"/>-->
+
+    <bean id="constructorInstance" class="com.fcant.ch02.instance.BeanClass" scope="prototype"/>
+
+    <!-- 配置bean，使用init-method属性指定初始化方法，使用 destroy-method属性指定销毁方法-->
+    <bean id="beanLife" class="com.fcant.ch02.life.BeanLife" init-method="initMyself" destroy-method="destroyMyself"/>
+
+</beans>
