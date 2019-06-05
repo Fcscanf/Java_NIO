@@ -30,7 +30,8 @@ public class SpringTest {
     @Test
     public void testCh01() {
         //初始化Spring容器ApplicationContext，加载配置文件
-        ApplicationContext appCon = new ClassPathXmlApplicationContext("ch01/applicationContext.xml");
+        ApplicationContext appCon = new
+                ClassPathXmlApplicationContext("ch01/applicationContext.xml");
         //通过容器获取test实例
         TestDao tt = (TestDao)appCon.getBean("test");//test为配置文件中的id
         tt.sayHello();

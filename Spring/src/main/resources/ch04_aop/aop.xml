@@ -13,6 +13,13 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-
+    <bean id="linkDao" class="com.fcant.ch04_aop.aop.impl.LinkDaoImpl"></bean>
+    <bean id="linkAspect" class="com.fcant.ch04_aop.aop.LinkAspect"></bean>
+    <bean id="linkDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" value="com.fcant.ch04_aop.aop.LinkDao"></property>
+        <property name="target" ref="linkDao"></property>
+        <property name="interceptorNames" value="linkAspect"></property>
+        <property name="proxyTargetClass" value="true"></property>
+    </bean>
 
 </beans>
