@@ -2,6 +2,7 @@ package com.fcant.ch01;
 
 import com.fcant.ch01.dao.TestDao;
 import com.fcant.ch02.annotation.User;
+import com.fcant.ch02.annotation.controller.UserController;
 import com.fcant.ch02.instance.BeanClass;
 import com.fcant.ch02.life.BeanLife;
 import org.junit.Test;
@@ -22,6 +23,8 @@ public class SpringTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("ch02/anno.xml");
         User user = (User) context.getBean("user");
         System.out.println(user.showUserName());
+        UserController userController = (UserController) context.getBean("userController");
+        userController.addUser();
     }
 
     @Test
