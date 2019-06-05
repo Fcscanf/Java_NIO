@@ -1,6 +1,7 @@
 package com.fcant.ch01;
 
 import com.fcant.ch01.dao.TestDao;
+import com.fcant.ch02.annotation.User;
 import com.fcant.ch02.instance.BeanClass;
 import com.fcant.ch02.life.BeanLife;
 import org.junit.Test;
@@ -15,6 +16,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 下午 14:20 2019-06-03/0003
  */
 public class SpringTest {
+
+    @Test
+    public void annoTest() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("ch02/anno.xml");
+        User user = (User) context.getBean("user");
+        System.out.println(user.showUserName());
+    }
 
     @Test
     public void testCh01() {
@@ -44,7 +52,7 @@ public class SpringTest {
     }
 
     @Test
-    public void ch02LifeTest() {
+    public void ch02BeanLifeTest() {
         ClassPathXmlApplicationContext ctx =
                 new ClassPathXmlApplicationContext("ch02/applicationContext.xml");
         System.out.println("获得对象前");
