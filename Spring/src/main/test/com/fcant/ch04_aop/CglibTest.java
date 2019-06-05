@@ -16,6 +16,15 @@ import org.springframework.cglib.proxy.Enhancer;
  */
 public class CglibTest {
 
+    /**
+     * CGLIB字节码生成库
+     * 1、不需要目标对象实现指定接口
+     * 2、被final修饰的类和方法是不能用CGLIB实现代理
+     *
+     * @author Fcscanf
+     * @date 下午 14:18 2019-06-05/0005
+     */
+
     @Test
     public void cglibTest() {
         Enhancer enhancer = new Enhancer();
