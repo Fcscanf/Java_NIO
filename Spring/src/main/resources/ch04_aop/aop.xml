@@ -22,4 +22,17 @@
         <property name="proxyTargetClass" value="true"></property>
     </bean>
 
+    <bean id="xmlDao" class="com.fcant.ch04_aop.xml.impl.XmlDaoImpl"></bean>
+    <bean id="xmlAspect" class="com.fcant.ch04_aop.xml.XmlAspect"></bean>
+    <aop:config>
+        <aop:aspect ref="xmlAspect">
+            <aop:pointcut id="pointCut" expression="execution(* com.fcant.ch04_aop.xml.*.*(..))"/>
+            <aop:before method="before" pointcut-ref="pointCut"></aop:before>
+            <aop:after-returning method="afterReturn" pointcut-ref="pointCut"/>
+            <aop:around method="around" pointcut-ref="pointCut"/>
+            <aop:after-throwing method="except" pointcut-ref="pointCut" throwing="throwable"/>
+            <aop:after method="after" pointcut-ref="pointCut"/>
+        </aop:aspect>
+    </aop:config>
+
 </beans>

@@ -1,6 +1,7 @@
 package com.fcant.ch04_aop;
 
 import com.fcant.ch04_aop.aop.LinkDao;
+import com.fcant.ch04_aop.xml.XmlDao;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,5 +22,13 @@ public class AopTest {
                 ClassPathXmlApplicationContext("ch04_aop/aop.xml");
         LinkDao proxy = (LinkDao) context.getBean("linkDaoProxy");
         proxy.checkBalance();
+    }
+
+    @Test
+    public void aopXmlTest() {
+        ApplicationContext context = new
+                ClassPathXmlApplicationContext("ch04_aop/aop.xml");
+        XmlDao xmlDao = (XmlDao) context.getBean("xmlDao");
+        xmlDao.checkBalance();
     }
 }
