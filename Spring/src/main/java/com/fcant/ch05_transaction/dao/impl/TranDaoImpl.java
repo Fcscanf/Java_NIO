@@ -1,9 +1,14 @@
 package com.fcant.ch05_transaction.dao.impl;
 
+import com.fcant.ch05_transaction.bean.Tran;
 import com.fcant.ch05_transaction.dao.TranDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * TranDaoImpl
@@ -24,5 +29,12 @@ public class TranDaoImpl implements TranDao {
     public int updateTran(String sql, Object[] args) {
         int i = jdbcTemplate.update(sql, args);
         return i;
+    }
+
+    @Override
+    public List<Tran> queryTran(String sql, Object[] args) {
+        RowMapper<Tran> rowMapper = new BeanPropertyRowMapper<Tran>(Tran.class);
+        List<Tran> trans = jdbcTemplate.query(sql, args, rowMapper);
+        return trans;
     }
 }

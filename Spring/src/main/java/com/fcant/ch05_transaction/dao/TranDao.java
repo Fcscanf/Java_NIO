@@ -1,5 +1,9 @@
 package com.fcant.ch05_transaction.dao;
 
+import com.fcant.ch05_transaction.bean.Tran;
+
+import java.util.List;
+
 /**
  * TranDao
  * <p>
@@ -11,5 +15,7 @@ package com.fcant.ch05_transaction.dao;
  */
 public interface TranDao {
     public int updateTran(String sql, Object[] args);
+
+    public List<Tran> queryTran(String sql, Object[] args);
 
 }
