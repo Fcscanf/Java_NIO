@@ -2,6 +2,7 @@ package com.fcant.ch05_transaction;
 
 import com.fcant.ch05_transaction.bean.Tran;
 import com.fcant.ch05_transaction.dao.TranDao;
+import com.fcant.ch05_transaction.trans.TransExample;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -45,5 +46,13 @@ public class TranTest {
         Object[] feilds = {null, "Fcant", "male"};
         TranDao tranDao = (TranDao) context.getBean("tranDao");
         tranDao.updateTran(sql, feilds);
+    }
+
+    @Test
+    public void tranManTest() {
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("ch05_transaction/applicationContext.xml");
+        TransExample transExample = (TransExample) context.getBean("transExample");
+        System.out.println(transExample.test());
     }
 }

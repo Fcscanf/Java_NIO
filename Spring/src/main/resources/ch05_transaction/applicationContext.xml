@@ -4,6 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
     <!-- 指定需要扫描的包（包括子包），使注解生效 -->
     <context:component-scan base-package="com.fcant.ch05_transaction.dao"/>
+    <context:component-scan base-package="com.fcant.ch05_transaction.trans"/>
     <!-- 配置数据源 -->
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
         <!-- MySQL数据库驱动 -->
