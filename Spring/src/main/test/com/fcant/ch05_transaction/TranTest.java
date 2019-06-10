@@ -55,4 +55,12 @@ public class TranTest {
         TransExample transExample = (TransExample) context.getBean("transExample");
         System.out.println(transExample.test());
     }
+
+    @Test
+    public void tranTemManTest() {
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("ch05_transaction/applicationContext.xml");
+        TransExample transExample = (TransExample) context.getBean("transExample");
+        System.out.println(transExample.transTemTest());
+    }
 }
