@@ -2,6 +2,7 @@ package com.fcant.ch05_transaction;
 
 import com.fcant.ch05_transaction.bean.Tran;
 import com.fcant.ch05_transaction.dao.TranDao;
+import com.fcant.ch05_transaction.statment.controller.StatController;
 import com.fcant.ch05_transaction.trans.TransExample;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -62,5 +63,13 @@ public class TranTest {
                 new ClassPathXmlApplicationContext("ch05_transaction/applicationContext.xml");
         TransExample transExample = (TransExample) context.getBean("transExample");
         System.out.println(transExample.transTemTest());
+    }
+
+    @Test
+    public void mvcTransTest() {
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("ch05_transaction/applicationContext.xml");
+        StatController statController = (StatController) context.getBean("statController");
+        statController.opStat();
     }
 }
