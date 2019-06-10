@@ -40,5 +40,20 @@
         <property name="transactionManager" ref="txManager"/>
     </bean>
 
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <!--      表示任意方法     -->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--  编写AOP  -->
+    <aop:config>
+        <!-- 定义切入点 -->
+        <aop:pointcut id="txPointCut" expression="execution(* com.fcant.ch05_transaction.statment.service.*.*(..))"/>
+        <!-- 切面：将切入点与通知关联 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"></aop:advisor>
+    </aop:config>
+
     <tx:annotation-driven transaction-manager="txManager"/>
 </beans>

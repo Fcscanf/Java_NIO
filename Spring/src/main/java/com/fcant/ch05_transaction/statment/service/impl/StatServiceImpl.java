@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @description
  * @date 上午 10:52 2019-06-10/0010
  */
-@Transactional
+//@Transactional
 @Service
 public class StatServiceImpl implements StatService {
 
