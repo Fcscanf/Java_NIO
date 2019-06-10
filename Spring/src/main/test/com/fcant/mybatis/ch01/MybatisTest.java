@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * MybatisTest
@@ -20,11 +21,29 @@ import java.io.InputStream;
 public class MybatisTest {
 
     @Test
-    public void mybatisTest() {
+    public void mybatisSelectTest() {
         InputStream resourceAsStream = MybatisTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        Tran tran = sqlSession.selectOne("com.fcant.mybatis.ch01.mapper.TranMapper.selectUserById", 90);
-        System.out.println(tran.toString());
+        //Tran tran = sqlSession.selectOne("com.fcant.mybatis.ch01.mapper.TranMapper.selectUserById", 90);
+        //System.out.println(tran.toString());
+        // 命名空间为了识别重名，所以在此处可以使用也可以不使用
+        List<Tran> trans = sqlSession.selectList("com.fcant.mybatis.ch01.mapper.TranMapper.selectAllUser");
+        for (Tran tran : trans) {
+            System.out.println(tran.toString());
+        }
+    }
+
+    @Test
+    public void mybatisAddTest() {
+        InputStream resourceAsStream = MybatisTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Tran tran = new Tran();
+        tran.setUid(88);
+        tran.setUname("Grid");
+        tran.setUsex("woman");
+        sqlSession.insert("com.fcant.mybatis.ch01.mapper.TranMapper.addUser", tran);
+        System.out.println("用户添加成功!");
     }
 }
