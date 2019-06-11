@@ -15,4 +15,9 @@
     <insert id="addUser" parameterType="com.fcant.ch05_transaction.bean.Tran">
         insert into tran(uname, usex) values (#{uname}, #{usex})
     </insert>
+
+    <insert id="addUserByMap" parameterType="map">
+        insert into tran(uname, usex) values (#{uname}, #{usex})
+    </insert>
+
 </mapper>

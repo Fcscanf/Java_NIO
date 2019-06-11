@@ -7,7 +7,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * MybatisTest
@@ -44,6 +46,20 @@ public class MybatisTest {
         tran.setUname("Grid");
         tran.setUsex("woman");
         sqlSession.insert("com.fcant.mybatis.ch01.mapper.TranMapper.addUser", tran);
+        System.out.println("用户添加成功!");
+    }
+
+    @Test
+    public void mybatisAddByMapTest() {
+        InputStream resourceAsStream = MybatisTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Map map = new HashMap();
+        map.put("uname", "kris");
+        map.put("usex", "女");
+        sqlSession.insert("addUserByMap", map);
+        sqlSession.commit();
+        sqlSession.close();
         System.out.println("用户添加成功!");
     }
 }
