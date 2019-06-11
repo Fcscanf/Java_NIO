@@ -1,9 +1,12 @@
 package com.fcant.mybatis.ch01;
 
+import com.fcant.ch02.annotation.User;
 import com.fcant.ch05_transaction.bean.Tran;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -61,5 +64,20 @@ public class MybatisTest {
         sqlSession.commit();
         sqlSession.close();
         System.out.println("用户添加成功!");
+    }
+
+    @Test
+    public void mybatisAddByKeyTest() {
+        InputStream resourceAsStream = MybatisTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Tran tran = new Tran();
+        tran.setUname("赵乾坤");
+        tran.setUsex("渣男");
+        sqlSession.insert("addUserByKey", tran);
+        sqlSession.commit();
+        System.out.println(tran.getUid());
+        sqlSession.close();
+
     }
 }

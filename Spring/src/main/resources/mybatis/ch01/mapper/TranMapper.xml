@@ -20,4 +20,9 @@
         insert into tran(uname, usex) values (#{uname}, #{usex})
     </insert>
 
+    <!--主键回填-->
+    <insert id="addUserByKey" parameterType="map" keyProperty="uid" useGeneratedKeys="true">
+        insert into tran(uname, usex) values (#{uname}, #{usex})
+    </insert>
+
 </mapper>
