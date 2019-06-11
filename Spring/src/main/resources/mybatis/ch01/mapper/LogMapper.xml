@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fcant.mybatis.ch01.mapper.TranMapper">
+
+    <insert id="addLog" parameterType="com.fcant.mybatis.ch01.bean.Log">
+        <selectKey keyProperty="logid" resultType="integer" order="BEFORE">
+            select ifnull(max(logid)+1, 1) from t_log
+        </selectKey>
+        insert into t_log(logid, msg) values (#{logid}, #{msg})
+    </insert>
+</mapper>
