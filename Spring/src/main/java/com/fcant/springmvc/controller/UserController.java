@@ -45,8 +45,45 @@ public class UserController {
         user.setUserName(userName);
         user.setFullName(fullName);
         user.setPassword(password);
-        userList.add(user);
+        // 忽略重名用户
+        if (isUser(userName)) {
+            return "reg";
+        } else {
+            userList.add(user);
+        }
+
         System.out.println(user.toString());
         return "login";
+    }
+
+    @RequestMapping("/loginUser")
+    public String loginUser(@RequestParam("userName") String userName,
+                            @RequestParam("fullName") String fullName,
+                            @RequestParam("password") String password) {
+        for (User user : userList) {
+            if (user.getUserName().equals(userName)) {
+                if (user.getPassword().equals(password)) {
+                    return "wel";
+                }
+            }
+        }
+        return "reg";
+    }
+
+    /**
+     * 检查用户名是否已存在
+     *
+     * @param userName
+     * @return true
+     * @author Fcscanf
+     * @date 下午 19:55 2019-06-12/0012
+     */
+    public boolean isUser(String userName) {
+        for (User user : userList) {
+            if (user.getUserName().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

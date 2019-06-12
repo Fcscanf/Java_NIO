@@ -16,6 +16,7 @@
     <title>用户注册</title>
 </head>
 <body>
+<h1>欢迎注册！</h1>
 <form method="post" action="<%=basePath%>/user/addUser">
     <table>
         <tr>
@@ -32,7 +33,7 @@
         </tr>
         <tr>
             <td><input type="submit" value="注册"></td>
-            <td><input type="submit" value="登录"></td>
+            <td><input type="reset" value="重置"></td>
         </tr>
     </table>
 </form>
