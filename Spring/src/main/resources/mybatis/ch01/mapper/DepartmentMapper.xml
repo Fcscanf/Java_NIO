@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DepartmentMapper">
+
+    <select id="selectDept" resultType="deptResult">
+        select d.deptid, d.deptname, t.uid, t.uname from t_department d, tran t
+        where d.deptid = u.deptid and d.deptid=#{deptid}
+    </select>
+    <resultMap id="deptResult" type="com.fcant.mybatis.ch01.bean.Department">
+        <id property="deptId" column="dept_id"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="tranList" ofType="com.fcant.ch05_transaction.bean.Tran">
+            <id property="uid" column="uid"></id>
+            <result property="uname" column="uname"></result>
+        </collection>
+    </resultMap>
+
+    <!--TODO -->
+    <select id="selectTran" parameterType="Integer" resultType="com.fcant.ch05_transaction.bean.Tran">
+        select uid, uname from tran where uid=#{uid}
+    </select>
+    <select id="selectDeptR" parameterType="int">
+        select deptid, deptname from t_department where deptid=#{deptid}
+    </select>
+</mapper>

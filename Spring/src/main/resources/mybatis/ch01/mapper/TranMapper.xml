@@ -25,4 +25,161 @@
         insert into tran(uname, usex) values (#{uname}, #{usex})
     </insert>
 
+    <select id="selectTran" parameterType="Integer" resultType="com.fcant.ch05_transaction.bean.Tran">
+        select t.uid, t.uname, t.uesx, deptname
+        from tran t, t_department d
+        where t.depaid=d.deptid
+        and t.uid=#{uid}
+    </select>
+    <resultMap id="tranResultMap" type="com.fcant.ch05_transaction.bean.Tran">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uname"></result>
+        <!--        <association property="department" javaType="com.fcant.mybatis.ch01.bean.Department">-->
+        <!--            <id property="deptId" column="dept_id"></id>-->
+        <!--            <result property="departName" column="depart_name"></result>-->
+        <!--        </association>-->
+    </resultMap>
+
+    <!--Select字句必须带上外键-->
+    <select id="selectTranR" parameterType="Integer" resultMap="tranResultMapR">
+        select uid, uname, usex, deptid
+        from tran
+        where uid=#{uid}
+    </select>
+    <select id="selectDept" parameterType="Integer" resultType="com.fcant.mybatis.ch01.bean.Department">
+        select deptid, deptname
+        from t_department
+        where deptid=#{deptid}
+    </select>
+    <resultMap id="tranResultMapR" type="com.fcant.ch05_transaction.bean.Tran">
+        <id property="uid" column="uid"></id>
+        <result property="uname" column="uname"></result>
+        <!--        <association property="department" column="deptid" select="selectDept"></association>-->
+    </resultMap>
+
+    <!--    动态SQL-->
+    <select id="selectByCandition" parameterType="com.fcant.ch05_transaction.bean.Tran"
+            resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        where
+        <if test="usex != null and usex != ''">
+            usex=#{usex}
+        </if>
+        <if test="uname != null and uname != ''">
+            and uname=#{uname}
+        </if>
+    </select>
+
+    <select id="selectByCandition1" parameterType="com.fcant.ch05_transaction.bean.Tran"
+            resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        <where>
+            <if test="uname != null and uname != ''">
+                uname=#{uname}
+            </if>
+            <if test="usex != null and usex != ''">
+                usex=#{usex}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectTranChoose" parameterType="com.fcant.ch05_transaction.bean.Tran"
+            resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        <where>
+            <choose>
+                <when test="uid != null and uid != 0">
+                    uid=#{uid}
+                </when>
+                <when test="uname != null and uname != ''">
+                    and uname=#{uname}
+                </when>
+                <otherwise>
+                    and usex=#{usex}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="selectTranTrim" parameterType="com.fcant.ch05_transaction.bean.Tran"
+            resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        <trim prefix="where" prefixOverrides="and">
+            <if test="test=uname != null and uname != ''">
+                and uname=#{uname}
+            </if>
+            <if test="usex != null and usex != ''">
+                and t.usex=#{usex}
+            </if>
+        </trim>
+    </select>
+
+    <select id="updateTranTrim" parameterType="com.fcant.ch05_transaction.bean.Tran">
+        update tran t
+        <trim prefix="set" suffixOverrides=",">
+            <if test="uname != null and uname != ''">
+                t.uname=#{uname},
+            </if>
+            <if test="usex != null and usex != ''">
+                t.usex=#{usex},
+            </if>
+        </trim>
+        where uid=#{uid}
+    </select>
+
+    <update id="updateCondition" parameterType="com.fcant.ch05_transaction.bean.Tran">
+        update tran t
+        <set>
+            <if test="uname != null and uname != ''">
+                t.uname=#{uname}
+            </if>
+            <if test="usex != null and usex != ''">
+                and t.usex=#{usex}
+            </if>
+        </set>
+    </update>
+
+    <update id="updateCondition1" parameterType="com.fcant.ch05_transaction.bean.Tran">
+        update tran t
+        <set>
+            <choose>
+                <when test="uname != null and uname != ''">
+                    t.uname=#{uname}
+                </when>
+            </choose>
+        </set>
+        where uid=#{uid}
+    </update>
+
+    <sql id="sqlPrice">
+        <if test="uname != null and uname !=''">
+            and uname=#{uname}
+        </if>
+        <if test="usex != null and usex != ''">
+            and t.usex=#{usex}
+        </if>
+    </sql>
+
+    <select id="selectUserRef" parameterType="com.fcant.ch05_transaction.bean.Tran"
+            resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        <trim prefix="where" prefixOverrides="and/or">
+            <include refid="sqlPrice"></include>
+        </trim>
+    </select>
+
+    <!--硬查询-->
+    <select id="selectTranEach" parameterType="list" resultType="com.fcant.ch05_transaction.bean.Tran">
+        select *
+        from tran
+        <foreach collection="list" item="uid" open="(" close=")" separator=",">
+            #{uid}
+        </foreach>
+    </select>
+
 </mapper>

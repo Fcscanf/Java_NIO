@@ -80,4 +80,18 @@ public class MybatisTest {
         sqlSession.close();
 
     }
+
+    @Test
+    public void selectByConditionTest() {
+        InputStream resourceAsStream = MybatisTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Tran tran = new Tran();
+        tran.setUname("赵乾坤");
+        tran.setUsex("渣男");
+        List<Tran> tranList = sqlSession.selectList("selectByCandition", tran);
+        for (Tran tra : tranList) {
+            System.out.println(tra.toString());
+        }
+    }
 }

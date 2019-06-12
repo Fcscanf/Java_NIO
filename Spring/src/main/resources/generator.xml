@@ -56,8 +56,8 @@
         <!--schema属性标签可以解决JDBC连接MySQL找不到主键的问题-->
         <!--catalog属性标签解决JDBC对catalog的支持性而不能识别数据库的主键，但是会在映射文件表前自动生成"数据库名称.."-->
         <!--        <table tableName="busdata" domainObjectName="BusData" schema="itbus"></table>-->
-        <table tableName="t_card" domainObjectName="Card" schema="spring_qst"></table>
-        <table tableName="t_student" domainObjectName="Student" schema="spring_qst"></table>
+        <table tableName="t_course" domainObjectName="Course" schema="spring_qst"></table>
+        <!--        <table tableName="t_student" domainObjectName="Student" schema="spring_qst"></table>-->
         <!--<table tableName="tnl_dept" domainObjectName="Department" schema="ssm_crud"></table>-->
 
     </context>

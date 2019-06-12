@@ -22,5 +22,8 @@
         <!-- 映射文件的位置 XML文件的Resource目录下的绝对路径-->
         <mapper resource="mybatis/ch01/mapper/TranMapper.xml"/>
         <mapper resource="mybatis/ch01/mapper/LogMapper.xml"/>
+        <mapper resource="mybatis/ch01/mapper/Studentapper.xml"/>
+        <mapper resource="mybatis/ch01/mapper/CardMapper.xml"/>
+        <mapper resource="mybatis/ch01/mapper/DepartmentMapper.xml"/>
     </mappers>
 </configuration>
