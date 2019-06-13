@@ -3,6 +3,7 @@ package com.fcant.springmvc.controller;
 import com.fcant.springmvc.bean.User;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -35,6 +36,27 @@ public class UserController {
     @RequestMapping("/showReg")
     public String showReg() {
         return "reg";
+    }
+
+    /**
+     * 路径取值
+     *
+     * @param userid
+     * @return wel
+     * @author Fcscanf
+     * @date 上午 9:21 2019-06-13/0013
+     */
+    @RequestMapping(value = "/login/{userId}")
+    public String login(@PathVariable(value = "userId") String userid) {
+        System.out.println(userid);
+        return "wel";
+    }
+
+    @RequestMapping("/addUser1")
+    public String addUser(User user) {
+        userList.add(user);
+        System.out.println(user.toString());
+        return "login";
     }
 
     @RequestMapping("/addUser")

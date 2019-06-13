@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1>欢迎注册！</h1>
-<form method="post" action="<%=basePath%>/user/addUser">
+<form method="post" action="<%=basePath%>/user/addUser1">
     <table>
         <tr>
             <td>用户名</td>
@@ -30,6 +30,10 @@
         <tr>
             <td>密码</td>
             <td><input name="password" type="password"></td>
+        </tr>
+        <tr>
+            <td>地址</td>
+            <td><input name="address.addressName" type="text"></td>
         </tr>
         <tr>
             <td><input type="submit" value="注册"></td>
