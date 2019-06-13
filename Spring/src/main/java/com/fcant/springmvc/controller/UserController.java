@@ -28,6 +28,19 @@ public class UserController {
         userList = new ArrayList<User>();
     }
 
+    @RequestMapping("/showcheckbox")
+    public String showCheckBox() {
+        return "checkbox";
+    }
+
+    @RequestMapping("/array")
+    public String getArray(@RequestParam(value = "device") Integer[] device) {
+        for (int i = 0; i < device.length; i++) {
+            System.out.println(device[i]);
+        }
+        return "login";
+    }
+
     @RequestMapping("/index")
     public String show() {
         return "index";
