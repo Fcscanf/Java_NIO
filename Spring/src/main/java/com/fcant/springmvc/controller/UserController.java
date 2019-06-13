@@ -52,6 +52,32 @@ public class UserController {
     }
 
     /**
+     * -----------转发会丢失数据、重定向不会丢失数据-------------
+     */
+
+    /**
+     * 通过SpringMVC进行请求的转发控制
+     *
+     * @author Fcscanf
+     * @date 下午 13:40 2019-06-13/0013
+     */
+    @RequestMapping("/forward")
+    public String forward() {
+        return "forward:/user/showReg";
+    }
+
+    /**
+     * 通过SpringMVC进行请求的重定向控制
+     *
+     * @author Fcscanf
+     * @date 下午 13:40 2019-06-13/0013
+     */
+    @RequestMapping("/redirect")
+    public String redirect() {
+        return "redirect:/user/showReg";
+    }
+
+    /**
      * 路径取值
      *
      * @param userid
