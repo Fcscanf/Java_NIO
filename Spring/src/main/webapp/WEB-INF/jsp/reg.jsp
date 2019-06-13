@@ -17,7 +17,7 @@
 </head>
 <body>
 <h1>欢迎注册！</h1>
-<form method="post" action="<%=basePath%>/user/addUser1">
+<form method="post" action="<%=basePath%>/user/reg">
     <table>
         <tr>
             <td>用户名</td>

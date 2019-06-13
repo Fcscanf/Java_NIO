@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,17 @@ public class UserController {
 
     {
         userList = new ArrayList<User>();
+    }
+
+    @RequestMapping("/mav")
+    public ModelAndView modelAndView() {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        user.setUserName("赵乾坤");
+        user.setFullName("Fuck");
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("wel");
+        return modelAndView;
     }
 
     @RequestMapping("/showcheckbox")
@@ -91,11 +103,14 @@ public class UserController {
         return "wel";
     }
 
-    @RequestMapping("/addUser1")
-    public String addUser(User user) {
+    @RequestMapping("/reg")
+    public ModelAndView addUser(User user) {
+        ModelAndView modelAndView = new ModelAndView();
         userList.add(user);
         System.out.println(user.toString());
-        return "login";
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     @RequestMapping("/addUser")
@@ -115,6 +130,25 @@ public class UserController {
 
         System.out.println(user.toString());
         return "login";
+    }
+
+    @RequestMapping("/login")
+    public ModelAndView userLogin(@RequestParam("userName") String userName,
+                                  @RequestParam("fullName") String fullName,
+                                  @RequestParam("password") String password) {
+        ModelAndView modelAndView = new ModelAndView();
+        for (User user : userList) {
+            if (user.getUserName().equals(userName)) {
+                if (user.getPassword().equals(password)) {
+                    user.setPassword("");
+                    modelAndView.setViewName("wel");
+                    modelAndView.addObject("user", user);
+                    return modelAndView;
+                }
+            }
+        }
+        modelAndView.setViewName("reg");
+        return modelAndView;
     }
 
     @RequestMapping("/loginUser")

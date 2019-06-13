@@ -21,11 +21,11 @@
     <table>
         <tr>
             <td>用户名</td>
-            <td><input name="userName" type="text"></td>
+            <td><input name="userName" type="text" value="${user.userName}"></td>
         </tr>
         <tr>
             <td>全名</td>
-            <td><input name="fullName" type="text"></td>
+            <td><input name="fullName" type="text" value="${user.fullName}"></td>
         </tr>
         <tr>
             <td>密码</td>
